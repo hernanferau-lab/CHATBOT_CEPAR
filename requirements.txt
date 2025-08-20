@@ -3,4 +3,4 @@ openai
 langchain
 langchain-community
 faiss-cpu
-tiktoken
+tiktoken==0.5.2
