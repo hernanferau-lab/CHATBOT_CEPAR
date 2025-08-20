@@ -1,40 +1,42 @@
 
-import streamlit as st
-from langchain.chat_models import ChatOpenAI
-from langchain.chains import RetrievalQA
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.document_loaders import TextLoader
 import os
+import streamlit as st
+from dotenv import load_dotenv
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import TextLoader
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.chat_models import ChatOpenAI
+from langchain.chains import RetrievalQA
 
-# Configura tu API Key (reemplaza con la tuya)
-os.environ["OPENAI_API_KEY"] = "sk-..."
+# Cargar variables de entorno
+load_dotenv()
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
-# Configura la página de Streamlit
-st.set_page_config(page_title="Asistente CEPAR", layout="wide")
+# Verifica que la clave esté presente
+if not openai_api_key:
+    st.error("🔐 No se ha configurado la clave OPENAI_API_KEY. Agrega tu clave en Secrets de Streamlit Cloud.")
+    st.stop()
+
+# Título de la App
 st.title("🤖 Asistente Legal - Demo CEPAR")
 
-# Cargar el documento base (protocolo)
-with open("protocolo.txt", "r", encoding="utf-8") as f:
-    raw_text = f.read()
-
-# Procesamiento del texto
-splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-texts = splitter.split_text(raw_text)
-
-# Embeddings y vector store
-embedding = OpenAIEmbeddings()
+# Carga y embebe el documento
+loader = TextLoader("protocolo.txt")
+documents = loader.load()
+texts = [doc.page_content for doc in documents]
+embedding = OpenAIEmbeddings(openai_api_key=openai_api_key)
 db = FAISS.from_texts(texts, embedding)
+
+# Inicializa el modelo
 retriever = db.as_retriever()
+qa_chain = RetrievalQA.from_chain_type(
+    llm=ChatOpenAI(openai_api_key=openai_api_key),
+    retriever=retriever
+)
 
-# Modelo de lenguaje
-llm = ChatOpenAI(model_name="gpt-4")
-qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+# UI de interacción
+pregunta = st.text_input("¿En qué puedo ayudarte hoy?")
+if pregunta:
+    respuesta = qa_chain.run(pregunta)
+    st.write("Respuesta:", respuesta)
 
-# Interfaz de usuario
-query = st.text_input("Haz tu pregunta sobre protocolos de denuncia:")
-
-if query:
-    result = qa_chain.run(query)
-    st.success(result)
