@@ -39,4 +39,3 @@ pregunta = st.text_input("¿En qué puedo ayudarte hoy?")
 if pregunta:
     respuesta = qa_chain.run(pregunta)
     st.write("Respuesta:", respuesta)
-
