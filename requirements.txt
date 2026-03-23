@@ -1,6 +1,7 @@
 streamlit
 openai==0.28.1
 langchain==0.0.350
+langchain-community==0.0.20
 faiss-cpu
 tiktoken==0.11.0
 python-dotenv
