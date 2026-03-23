@@ -24,13 +24,13 @@ st.title("🤖 Asistente Legal - Demo CEPAR")
 loader = TextLoader("protocolo.txt")
 documents = loader.load()
 texts = [doc.page_content for doc in documents]
-embedding = OpenAIEmbeddings(openai_api_key=openai_api_key)
+embedding = OpenAIEmbeddings(api_key=openai_api_key)
 db = FAISS.from_texts(texts, embedding)
 
 # Inicializa el modelo
 retriever = db.as_retriever()
 qa_chain = RetrievalQA.from_chain_type(
-    llm=ChatOpenAI(openai_api_key=openai_api_key),
+    llm=ChatOpenAI(api_key=openai_api_key, temperature=0),
     retriever=retriever
 )
 
