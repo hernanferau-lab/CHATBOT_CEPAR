@@ -1,4 +1,3 @@
-
 import os
 import streamlit as st
 from dotenv import load_dotenv
@@ -24,6 +23,7 @@ st.title("🤖 Asistente Legal - Demo CEPAR")
 loader = TextLoader("protocolo.txt")
 documents = loader.load()
 texts = [doc.page_content for doc in documents]
+
 embedding = OpenAIEmbeddings(api_key=openai_api_key)
 db = FAISS.from_texts(texts, embedding)
 
@@ -38,4 +38,4 @@ qa_chain = RetrievalQA.from_chain_type(
 pregunta = st.text_input("¿En qué puedo ayudarte hoy?")
 if pregunta:
     respuesta = qa_chain.run(pregunta)
-    st.write("Respuesta:", respuesta)
+    st.write("Respuesta:", respuesta))
