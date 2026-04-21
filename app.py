@@ -18,7 +18,7 @@ if not openai_api_key:
 
 # Título de la App
 st.title("⚖️  AI-Powered Workplace Harassment Investigation Assistant")
-st.subheader ("Prototype designed to improve legal case analysis using internal documentation")
+st.markdown("**Prototype designed to improve legal case analysis**")
 
 # Carga y embebe el documento
 loader = TextLoader("protocolo.txt")
@@ -36,7 +36,7 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # UI de interacción
-pregunta = st.text_input("¿En qué puedo ayudarte hoy?")
+pregunta = st.text_input("¿How can I help you today?")
 if pregunta:
     respuesta = qa_chain.run(pregunta)
-    st.write("Respuesta:", respuesta)
+    st.write("Answer:", respuesta)
