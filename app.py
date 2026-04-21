@@ -17,7 +17,8 @@ if not openai_api_key:
     st.stop()
 
 # Título de la App
-st.title("🤖 Asistente Legal - Demo CEPAR")
+st.title("⚖️  AI-Powered Workplace Harassment Investigation Assistant")
+st.subtitle ("Prototype designed to improve legal case analysis using internal documentation")
 
 # Carga y embebe el documento
 loader = TextLoader("protocolo.txt")
