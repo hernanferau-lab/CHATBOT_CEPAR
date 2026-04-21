@@ -17,8 +17,8 @@ if not openai_api_key:
     st.stop()
 
 # Título de la App
-st.title("⚖️  AI-Powered Workplace Harassment Investigation Assistant")
-st.markdown("**Prototype designed to improve legal case analysis**")
+st.title("⚖️  AI-Powered Legal Assistant")
+st.markdown("**Prototype designed to improve legal case analysis of workplace harrasment**")
 
 # Carga y embebe el documento
 loader = TextLoader("protocolo.txt")
