@@ -8,7 +8,7 @@ https://ai-document-assistant0.streamlit.app/
 ## Application Preview
 
 ### 1. Complaint Data Requirements
-![Complaint Example](./images/screenshot-1.png)
+![Complaint Example](.<img src="./images/screenshot-1.png" width="700">)
 
 The system helps users identify the required information to properly structure a workplace complaint, ensuring completeness and compliance with the investigation process.
 
