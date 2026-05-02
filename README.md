@@ -15,14 +15,14 @@ The system helps users identify the required information to properly structure a
 ---
 
 ### 2. Investigation Decision Support
-![Decision Example](./images/screenshot-2.png)
+<img src="./images/screenshot-2.png" width="600">
 
 The assistant supports decision-making by guiding users on whether a case should be handled internally or escalated to the Labour Authority, based on procedural logic.
 
 ---
 
 ### 3. Complex Case Handling
-![Edge Case Example](./images/screenshot-3.png)
+<img src="./images/screenshot-3.png" width="600">
 
 The system can assist with complex scenarios, such as cases involving individuals outside the organisation, helping users understand how procedures apply in non-standard situations.
 
